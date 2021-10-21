@@ -13,7 +13,10 @@ install: dwmblocks
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f dwmblocks $(DESTDIR)$(PREFIX)/bin
 	chmod 755 $(DESTDIR)$(PREFIX)/bin/dwmblocks
+	cp -f blocks/dwmblocks-* $(DESTDIR)$(PREFIX)/bin
+	chmod 755 $(DESTDIR)$(PREFIX)/bin/dwmblocks-*
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/dwmblocks
+	rm -f $(DESTDIR)$(PREFIX)/bin/dwmblocks-*
 
 .PHONY: clean install uninstall
