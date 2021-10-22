@@ -1,7 +1,7 @@
 #define CMDLENGTH 50
 #define DELIMITER " | "
 #define TRAILING_DELIMITER
-/* #define CLICKABLE_BLOCKS */
+#define CLICKABLE_BLOCKS
 
 const Block blocks[] = {
 	BLOCK("dwmblocks-battery", 5,    3)
