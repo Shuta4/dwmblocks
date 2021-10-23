@@ -1,3 +1,8 @@
 #!/bin/sh
 
-echo "BAT:$(cat /sys/class/power_supply/BAT1/capacity)"%
+ICON="BAT"
+if [ $(cat /sys/class/power_supply/BAT1/status) = "Charging" ]; then
+	ICON="CRG"
+fi
+
+echo "$ICON:$(cat /sys/class/power_supply/BAT1/capacity)"%
