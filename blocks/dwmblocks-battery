@@ -1,8 +1,23 @@
 #!/bin/sh
 
 ICON="BAT"
+CAPACITY="$(cat /sys/class/power_supply/BAT1/capacity)"
+TIMESTAMP_FILE="/tmp/dwmblocks-battery-timestamp"
+TIMESTAMP="$([ -f $TIMESTAMP_FILE ] && cat $TIMESTAMP_FILE || echo 0)"
+
+TIMEDIFF="$(expr $(date '+%s') - $TIMESTAMP)"
+
 if [ $(cat /sys/class/power_supply/BAT1/status) = "Charging" ]; then
 	ICON="CRG"
+
+	if [[ $CAPACITY -ge 80 ]]; then
+		notify-send "Charge reached 80%, plug charger off."
+	fi
+else
+	if [[ $CAPACITY -le 15 && $TIMEDIFF -ge 120 ]]; then
+		notify-send "Charge is low, plug charger in."
+		echo "$(date '+%s')" > $TIMESTAMP_FILE
+	fi
 fi
 
-echo "$ICON:$(cat /sys/class/power_supply/BAT1/capacity)"%
+echo "$ICON:$CAPACITY%"
