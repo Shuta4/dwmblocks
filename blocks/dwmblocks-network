@@ -13,4 +13,18 @@ fi
 
 [ "$(ip tuntap show)" ] && vpnIcon="V" || vpnIcon=""
 env printf '\x02'
-echo "I:$wifiIcon$ethIcon$vpnIcon"
+
+RxTx="$(awk '
+{
+	if(l1){
+		printf "RX:%.2f kB/s Tx:%.2f kB/s", ($2-l1)/1024, ($10-l2)/1024
+	}
+	else{
+		l1=$2;
+		l2=$10;
+	}
+}' \
+	<(grep wlp1s0 /proc/net/dev) \
+	<(sleep 1; grep wlp1s0 /proc/net/dev))"
+
+echo "I:$wifiIcon$ethIcon$vpnIcon $RxTx"
