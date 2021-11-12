@@ -1,3 +1,9 @@
 #!/bin/sh
 
+case $BLOCK_BUTTON in
+	1) notify-send "$(cal -m)" ;; # LMB
+	2)  ;; # MMB
+	3)  ;; # RMB
+esac
+
 date '+%Y-%m-%d %H:%M:%S'
