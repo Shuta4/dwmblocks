@@ -6,7 +6,11 @@ CC = gcc
 dwmblocks: main.o
 	$(CC) main.o -lX11 -Ofast -o dwmblocks
 main.o: main.c config.h
-	$(CC) -Ofast -c main.c
+	$(CC) \
+		$(shell [[ -d /sys/class/power_supply/BAT1 ]] && echo "-D HAS_BATTERY") \
+		-Ofast \
+		-c \
+		main.c
 clean:
 	rm -f *.o *.gch dwmblocks
 install: dwmblocks
