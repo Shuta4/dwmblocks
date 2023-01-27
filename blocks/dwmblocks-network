@@ -24,7 +24,7 @@ RxTx="$(awk '
 		l2=$10;
 	}
 }' \
-	<(grep -E "^[we]" /proc/net/dev) \
-	<(sleep 1; grep -E "^[we]" /proc/net/dev))"
+	<(grep -E "^[we]" /proc/net/dev | head -n 1) \
+	<(sleep 1; grep -E "^[we]" /proc/net/dev | head -n 1))"
 
 echo "I:$wifiIcon$ethIcon$vpnIcon $RxTx"
