@@ -4,7 +4,7 @@
 
 [ "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" = "up" ] && wifiIcon="W"
 
-if [ "$(cat /sys/class/net/e*/operstate 2>/dev/null)" = "up" ]; then
+if [ "$(cat /sys/class/net/e*s0/operstate 2>/dev/null)" = "up" ]; then
 	ethIcon="E"
 else
 	if [ ! $wifiIcon ]; then
